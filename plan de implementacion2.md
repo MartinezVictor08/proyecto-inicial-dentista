@@ -1,16 +1,65 @@
-# 📘 Plan Maestro de Implementación Mejorado — Plataforma Clínica “Dentista”
+# 📘 PLAN MAESTRO DE IMPLEMENTACIÓN MEJORADO — PLATAFORMA CLÍNICA “DENTISTA”
 
-## Arquitectura Empresarial Escalable con Flutter + Firebase
+# Arquitectura Empresarial Escalable con Flutter + Firebase
 
-### Enfoque: Clean Architecture + Modular Design + Repository Pattern
+### Enfoque: Arquitectura Limpia + Diseño Modular + Patrón Repositorio
 
-### UI/UX: Professional Mint Blue
+### UI/UX: Azul Menta Profesional
 
-### Estado Global: Riverpod / Bloc (Sin Provider)
+### Gestión Global de Estado: Provider
 
 ---
 
-# 🎯 Objetivo General del Proyecto
+# 📦 DEPENDENCIAS PRINCIPALES (`pubspec.yaml`)
+
+## Firebase
+
+* firebase_core
+* cloud_firestore
+* firebase_auth
+* firebase_storage
+* firebase_messaging
+* firebase_analytics
+* cloud_functions
+
+---
+
+## Gestión de Estado
+
+* provider
+
+---
+
+## UI/UX
+
+* google_fonts
+* flutter_svg
+* lottie
+* cached_network_image
+* shimmer
+* font_awesome_flutter
+
+---
+
+## Seguridad
+
+* flutter_secure_storage
+* local_auth
+
+---
+
+## Utilidades
+
+* intl
+* uuid
+* go_router
+* equatable
+* image_picker
+* table_calendar
+
+---
+
+# 🎯 OBJETIVO GENERAL DEL PROYECTO
 
 La plataforma **Dentista** será un ecosistema clínico multiplataforma diseñado para clínicas dentales modernas, permitiendo:
 
@@ -28,9 +77,10 @@ La solución estará desarrollada con:
 
 * Flutter (Frontend Multiplataforma)
 * Firebase (Backend Serverless)
-* Clean Architecture
-* Firebase Security Rules
+* Arquitectura Limpia
+* Reglas de Seguridad Firebase
 * Diseño UX clínico premium
+* Provider para gestión global de estado
 
 ---
 
@@ -42,11 +92,11 @@ La aplicación utilizará una arquitectura empresarial basada en separación est
 
 | Capa         | Responsabilidad                             |
 | ------------ | ------------------------------------------- |
-| Presentation | Pantallas, widgets, navegación y UX         |
-| Application  | Casos de uso y lógica de negocio            |
-| Domain       | Entidades puras y contratos                 |
-| Data         | Firebase, APIs, almacenamiento              |
-| Core         | Utilidades globales, constantes y seguridad |
+| Presentación | Pantallas, widgets, navegación y UX         |
+| Aplicación   | Casos de uso y lógica de negocio            |
+| Dominio      | Entidades puras y contratos                 |
+| Datos        | Firebase, APIs y almacenamiento             |
+| Núcleo       | Utilidades globales, constantes y seguridad |
 
 ---
 
@@ -68,37 +118,37 @@ lib/
 │   │   └── env_config.dart
 │   │
 │   ├── constants/
-│   │   ├── app_colors.dart
-│   │   ├── app_sizes.dart
-│   │   ├── app_strings.dart
-│   │   ├── firestore_collections.dart
-│   │   └── app_icons.dart
+│   │   ├── colores_app.dart
+│   │   ├── tamanos_app.dart
+│   │   ├── textos_app.dart
+│   │   ├── colecciones_firestore.dart
+│   │   └── iconos_app.dart
 │   │
 │   ├── errors/
-│   │   ├── exceptions.dart
-│   │   ├── failures.dart
-│   │   └── error_handler.dart
+│   │   ├── excepciones.dart
+│   │   ├── fallos.dart
+│   │   └── manejador_errores.dart
 │   │
 │   ├── network/
-│   │   ├── internet_checker.dart
-│   │   └── firebase_connectivity.dart
+│   │   ├── verificador_internet.dart
+│   │   └── conectividad_firebase.dart
 │   │
 │   ├── security/
-│   │   ├── encryption_service.dart
-│   │   ├── secure_storage_service.dart
-│   │   └── role_guard.dart
+│   │   ├── servicio_encriptacion.dart
+│   │   ├── almacenamiento_seguro.dart
+│   │   └── guardia_roles.dart
 │   │
 │   ├── services/
-│   │   ├── notification_service.dart
-│   │   ├── local_storage_service.dart
-│   │   ├── biometric_service.dart
-│   │   └── analytics_service.dart
+│   │   ├── servicio_notificaciones.dart
+│   │   ├── almacenamiento_local.dart
+│   │   ├── servicio_biometrico.dart
+│   │   └── servicio_analiticas.dart
 │   │
 │   ├── utils/
-│   │   ├── validators.dart
-│   │   ├── date_formatter.dart
-│   │   ├── currency_formatter.dart
-│   │   ├── extensions.dart
+│   │   ├── validadores.dart
+│   │   ├── formateador_fecha.dart
+│   │   ├── formateador_moneda.dart
+│   │   ├── extensiones.dart
 │   │   └── helpers.dart
 │   │
 │   └── widgets/
@@ -110,7 +160,7 @@ lib/
 │
 ├── features/
 │
-│   ├── authentication/
+│   ├── autenticacion/
 │   │   ├── data/
 │   │   │   ├── datasources/
 │   │   │   ├── models/
@@ -126,41 +176,73 @@ lib/
 │   │       ├── screens/
 │   │       ├── widgets/
 │   │       ├── controllers/
-│   │       └── state/
+│   │       └── providers/
 │
-│   ├── patients/
-│   ├── doctors/
-│   ├── appointments/
-│   ├── odontogram/
-│   ├── treatments/
-│   ├── prescriptions/
-│   ├── invoices/
-│   ├── payments/
-│   ├── inventory/
-│   ├── employees/
-│   ├── reports/
-│   ├── notifications/
+│   ├── pacientes/
+│   ├── doctores/
+│   ├── citas/
+│   ├── odontograma/
+│   ├── tratamientos/
+│   ├── recetas/
+│   ├── facturas/
+│   ├── pagos/
+│   ├── inventario/
+│   ├── empleados/
+│   ├── reportes/
+│   ├── notificaciones/
 │   └── dashboard/
 │
+├── providers/
+│   ├── auth_provider.dart
+│   ├── citas_provider.dart
+│   ├── pacientes_provider.dart
+│   ├── doctores_provider.dart
+│   ├── pagos_provider.dart
+│   ├── inventario_provider.dart
+│   ├── odontograma_provider.dart
+│   └── notificaciones_provider.dart
+│
+├── services/
+│   ├── servicio_auth_firebase.dart
+│   ├── servicio_firestore.dart
+│   ├── servicio_storage.dart
+│   ├── servicio_notificaciones.dart
+│   └── servicio_analiticas.dart
+│
+├── widgets/
+│   ├── botones/
+│   ├── tarjetas/
+│   ├── formularios/
+│   ├── dialogs/
+│   ├── inputs/
+│   └── loaders/
+│
+├── utils/
+│   ├── constantes.dart
+│   ├── validadores.dart
+│   ├── formateadores.dart
+│   ├── temas.dart
+│   └── rutas.dart
+│
 ├── shared/
-│   ├── components/
+│   ├── componentes/
 │   ├── layouts/
-│   ├── animations/
-│   ├── themes/
+│   ├── animaciones/
+│   ├── temas/
 │   └── responsive/
 │
 └── firebase/
-    ├── firestore_rules/
-    ├── firestore_indexes/
-    ├── cloud_functions/
-    └── storage_rules/
+    ├── reglas_firestore/
+    ├── indices_firestore/
+    ├── funciones_cloud/
+    └── reglas_storage/
 ```
 
 ---
 
 # 🚀 FASE 1 — CONFIGURACIÓN DE INFRAESTRUCTURA
 
-## Objetivo
+# Objetivo
 
 Preparar el ecosistema técnico completo para garantizar:
 
@@ -171,25 +253,145 @@ Preparar el ecosistema técnico completo para garantizar:
 
 ---
 
-## 1.1 Configuración de Firebase
+# 🔥 CONFIGURACIÓN FIREBASE CLI Y FIRECONSOLE
 
-### Acciones Técnicas
+## Instalación Firebase CLI
 
-### Authentication
+```bash id="oq8e74"
+npm install -g firebase-tools
+```
+
+---
+
+## Login Firebase
+
+```bash id="kgq9m8"
+firebase login
+```
+
+---
+
+## Logout Firebase
+
+```bash id="cgjwfw"
+firebase logout
+```
+
+---
+
+## Ver proyectos Firebase
+
+```bash id="jv25bg"
+firebase projects:list
+```
+
+---
+
+# Proyecto Firebase
+
+## Nombre del Proyecto
+
+```text id="1js1g8"
+bdtallermecanico
+```
+
+---
+
+# Configuración Android Firebase
+
+## Nombre del paquete
+
+```text id="wdjnv0"
+com.example.tallermecanico
+```
+
+---
+
+## Pasos
+
+### 1. Registrar Aplicación Android
+
+En Firebase Console:
+
+```text id="m36lws"
+Agregar App → Android
+```
+
+---
+
+### 2. Descargar Archivo
+
+```text id="7l8i9o"
+google-services.json
+```
+
+Mover a:
+
+```text id="ylu0eg"
+android/app/google-services.json
+```
+
+---
+
+### 3. Configuración Gradle (Proyecto)
+
+Archivo:
+
+```text id="2lbv9o"
+android/build.gradle
+```
+
+Agregar:
+
+```text id="vd6j0s"
+classpath 'com.google.gms:google-services:4.3.15'
+```
+
+---
+
+### 4. Configuración Gradle (Aplicación)
+
+Archivo:
+
+```text id="jlwm5d"
+android/app/build.gradle
+```
+
+Agregar:
+
+```text id="q55l4x"
+apply plugin: 'com.google.gms.google-services'
+```
+
+---
+
+### 5. SHA-1 y SHA-256
+
+Obtener con:
+
+```bash id="4g5hqf"
+keytool -list -v -alias androiddebugkey -keystore ~/.android/debug.keystore
+```
+
+---
+
+# 1.1 Configuración Firebase
+
+## Authentication
 
 Se habilitará:
 
-* Email/Password
+* Correo y contraseña
 * Recuperación de contraseña
 * Verificación de correo
 * Opcional:
 
-  * Google Sign-In
-  * Apple Sign-In
+  * Inicio con Google
+  * Inicio con Apple
 
 ---
 
-### Firestore Database
+## Firestore Database
 
 La base de datos se inicializará en:
 
@@ -199,7 +401,7 @@ La base de datos se inicializará en:
 
 ---
 
-### Firebase Storage
+## Firebase Storage
 
 Será utilizado para:
 
@@ -211,7 +413,7 @@ Será utilizado para:
 
 ---
 
-### Cloud Functions
+## Cloud Functions
 
 Se utilizarán para:
 
@@ -223,391 +425,387 @@ Se utilizarán para:
 
 ---
 
-## 1.2 Configuración Multiplataforma
+# 📊 FASE 2 — MODELO DE DATOS DETALLADO
 
-### Android
+# 👤 MÓDULO PERSONAS
 
-Configuración:
+# Colección: `Pacientes`
 
-* SHA-1 y SHA-256
-* Compatibilidad Android 7+
-* Firebase BoM
-* Permisos biométricos
-* Permisos de almacenamiento
-
----
-
-### iOS
-
-Configuración:
-
-* Push Notifications
-* Face ID
-* Apple Sign-In
-* App Transport Security
+| Campo            | Tipo de dato |
+| ---------------- | ------------ |
+| id               | String       |
+| nombre           | String       |
+| apellidos        | String       |
+| fecha_nacimiento | Timestamp    |
+| sexo             | String       |
+| telefono         | String       |
+| email            | String       |
+| curp             | String       |
+| grupo_sanguineo  | String       |
+| alergias         | String       |
 
 ---
 
-### Web
+# Colección: `Dentista`
 
-Configuración:
-
-* Hosting Firebase
-* SSL automático
-* Protección CORS
-* PWA Ready
-
----
-
-# 🧠 FASE 2 — DISEÑO DE ARQUITECTURA EMPRESARIAL
-
-## Objetivo
-
-Separar completamente:
-
-* UI
-* lógica clínica
-* acceso a datos
-* servicios externos
+| Campo              | Tipo de dato |
+| ------------------ | ------------ |
+| id                 | String       |
+| nombre             | String       |
+| apellidos          | String       |
+| cedula_profesional | String       |
+| especialidad       | String       |
+| telefono           | String       |
 
 ---
 
-## Clean Architecture Aplicada
+# Colección: `Empleado`
 
-## PRESENTATION
-
-Responsable de:
-
-* Widgets
-* Pantallas
-* Navegación
-* Estados UI
-* Formularios
-
-NO contiene:
-
-* lógica Firebase
-* consultas directas
-* reglas clínicas
+| Campo              | Tipo de dato |
+| ------------------ | ------------ |
+| id                 | String       |
+| nombre             | String       |
+| rui                | String       |
+| telefono           | String       |
+| fecha_contratacion | Timestamp    |
 
 ---
 
-## DOMAIN
+# 🦷 MÓDULO CLÍNICO
 
-Contiene:
+# Colección: `Historia_Clinica`
 
-* entidades puras
-* reglas de negocio
-* contratos abstractos
-* casos de uso
-
-Ejemplo:
-
-* Crear cita
-* Cancelar consulta
-* Generar factura
+| Campo          | Tipo de dato |
+| -------------- | ------------ |
+| id_historia    | String       |
+| id_paciente    | String       |
+| fecha_apertura | Timestamp    |
+| antecedentes   | String       |
+| medicamentos   | String       |
 
 ---
 
-## DATA
+# Colección: `Odontograma`
 
-Responsable de:
-
-* Firebase Auth
-* Firestore
-* Storage
-* APIs externas
-* Conversión JSON ↔ Modelos
-
----
-
-# 🔐 FASE 3 — SEGURIDAD Y PROTECCIÓN DE DATOS
-
-## Objetivo
-
-Garantizar cumplimiento clínico y protección de información médica.
+| Campo          | Tipo de dato |
+| -------------- | ------------ |
+| id_odontograma | String       |
+| id_historia    | String       |
+| fecha          | Timestamp    |
+| observaciones  | String       |
 
 ---
 
-## Estrategia de Seguridad
+# Colección: `Diente`
 
-### Firestore Security Rules
-
-Restricciones:
-
-| Rol      | Acceso              |
-| -------- | ------------------- |
-| Paciente | Solo sus documentos |
-| Dentista | Pacientes asignados |
-| Admin    | Acceso completo     |
+| Campo          | Tipo de dato |
+| -------------- | ------------ |
+| id_diente      | String       |
+| id_odontograma | String       |
+| numero_pieza   | int          |
+| estado         | String       |
+| observacion    | String       |
 
 ---
 
-## Encriptación
+# 📅 MÓDULO CITAS
 
-Se protegerá:
+# Colección: `Cita`
 
-* CURP
-* teléfonos
-* historial clínico
-* recetas
-* pagos
-
----
-
-## Secure Storage
-
-Para:
-
-* Tokens
-* Sesiones
-* Biometría
-* Credenciales locales
+| Campo       | Tipo de dato |
+| ----------- | ------------ |
+| id_cita     | String       |
+| id_paciente | String       |
+| id_dentista | String       |
+| fecha_hora  | Timestamp    |
+| estado      | String       |
+| motivo      | String       |
 
 ---
 
-## Auditoría
+# Colección: `Consulta`
 
-Se registrará:
-
-* acceso a expedientes
-* modificaciones
-* pagos
-* recetas emitidas
-
----
-
-# 🦷 FASE 4 — MODELO DE DATOS CLÍNICO
-
-## Objetivo
-
-Diseñar una base de datos optimizada para:
-
-* consultas rápidas
-* escalabilidad
-* integridad médica
+| Campo         | Tipo de dato |
+| ------------- | ------------ |
+| id_consulta   | String       |
+| id_cita       | String       |
+| id_dentista   | String       |
+| id_paciente   | String       |
+| fecha         | Timestamp    |
+| diagnostico   | String       |
+| observaciones | String       |
 
 ---
 
-# Colecciones Principales
+# Colección: `Tratamiento_Paciente`
 
-## pacientes
-
-Información clínica básica.
-
-Campos:
-
-* nombre
-* apellidos
-* CURP
-* alergias
-* grupo sanguíneo
-* contacto
-* seguro médico
+| Campo          | Tipo de dato |
+| -------------- | ------------ |
+| id             | String       |
+| id_paciente    | String       |
+| id_tratamiento | String       |
+| id_dentista    | String       |
+| fecha_inicio   | Timestamp    |
+| fecha_fin      | Timestamp    |
+| estado         | String       |
 
 ---
 
-## doctores
+# 💊 MÓDULO PRESCRIPCIONES
 
-Información profesional.
+# Colección: `Receta`
 
-Campos:
-
-* especialidad
-* cédula
-* disponibilidad
-* foto
-* horarios
-
----
-
-## historias_clinicas
-
-Expediente médico completo.
-
-Subcolecciones:
-
-* odontogramas
-* consultas
-* recetas
-* radiografías
+| Campo         | Tipo de dato |
+| ------------- | ------------ |
+| id_receta     | String       |
+| id_consulta   | String       |
+| id_paciente   | String       |
+| id_dentista   | String       |
+| fecha         | Timestamp    |
+| observaciones | String       |
 
 ---
 
-## citas
+# Colección: `Receta_Detalle`
 
-Agenda médica inteligente.
-
-Estados:
-
-* pendiente
-* confirmada
-* cancelada
-* completada
+| Campo       | Tipo de dato |
+| ----------- | ------------ |
+| id          | String       |
+| id_receta   | String       |
+| medicamento | String       |
+| dosis       | String       |
+| frecuencia  | String       |
+| duracion    | String       |
 
 ---
 
-## pagos
+# 💳 MÓDULO FINANCIERO
 
-Manejo financiero.
+# Colección: `Factura`
+
+| Campo       | Tipo de dato |
+| ----------- | ------------ |
+| id_factura  | String       |
+| id_paciente | String       |
+| fecha       | Timestamp    |
+| subtotal    | double       |
+| descuento   | double       |
+| total       | double       |
+| estado      | String       |
+
+---
+
+# Colección: `Pago`
+
+| Campo       | Tipo de dato |
+| ----------- | ------------ |
+| id_pago     | String       |
+| id_factura  | String       |
+| fecha       | Timestamp    |
+| monto       | double       |
+| metodo_pago | String       |
+| referencia  | String       |
+
+---
+
+# 📦 MÓDULO INVENTARIO
+
+# Colección: `Producto`
+
+| Campo         | Tipo de dato |
+| ------------- | ------------ |
+| id_producto   | String       |
+| nombre        | String       |
+| categoria     | String       |
+| unidad_medida | String       |
+| stock_actual  | int          |
+| stock_minimo  | int          |
+| proveedor     | String       |
+
+---
+
+# Colección: `Movimiento_Inventario`
+
+| Campo         | Tipo de dato |
+| ------------- | ------------ |
+| id_movimiento | String       |
+| id_producto   | String       |
+| tipo          | String       |
+| cantidad      | int          |
+| fecha         | Timestamp    |
+| motivo        | String       |
+
+---
+
+# 🔐 FASE 3 — LÓGICA DE USUARIOS Y SEGURIDAD
+
+# Roles del Sistema
+
+| Rol           | Permisos                 |
+| ------------- | ------------------------ |
+| Paciente      | Ver citas e historial    |
+| Dentista      | Consultas y odontogramas |
+| Administrador | Acceso completo          |
+
+---
+
+# Flujo de Acceso
+
+## Paciente
+
+```text id="k8u7e7"
+Login → Dashboard Paciente → Citas → Historial → Pagos
+```
+
+---
+
+## Dentista
+
+```text id="b95fsq"
+Login → Dashboard Dentista → Agenda → Consultas → Odontograma
+```
+
+---
+
+## Administrador
+
+```text id="9kxnl6"
+Login → Dashboard Admin → Inventario → Finanzas → Empleados
+```
+
+---
+
+# Seguridad Firestore
+
+## Restricciones
+
+| Usuario       | Acceso              |
+| ------------- | ------------------- |
+| Paciente      | Solo su información |
+| Dentista      | Pacientes asignados |
+| Administrador | Acceso global       |
+
+---
+
+# 📱 FASE 4 — FLUJO DE PANTALLAS
+
+# 1. Inicio
+
+Dashboard con:
+
+* Próximas citas
+* Pagos pendientes
+* Historial reciente
+* Tratamientos
+
+---
+
+# 2. Pantalla Doctores
 
 Incluye:
 
-* método de pago
-* referencia
-* factura
-* comprobante
+* Foto
+* Especialidad
+* Experiencia
+* Horarios
+
+Al seleccionar:
+
+```text id="5c7iv2"
+Perfil del Doctor
+```
+
+Mostrar:
+
+* Historial
+* Pacientes atendidos
+* Disponibilidad
 
 ---
 
-# 🖥️ FASE 5 — UI/UX PROFESIONAL “MINT BLUE”
+# 3. Pantalla Servicios
 
-## Objetivo
+Mostrar:
 
-Transmitir:
+| Elemento    |
+| ----------- |
+| Nombre      |
+| Descripción |
+| Precio      |
+| Duración    |
 
-* higiene
-* confianza
-* modernidad
-* precisión médica
+Botón:
 
----
-
-# Identidad Visual
-
-## Colores
-
-| Elemento   | Color         |
-| ---------- | ------------- |
-| Primario   | Mint Blue     |
-| Secundario | Soft Mint     |
-| Accent     | Teal          |
-| Background | White Blue    |
-| Error      | Coral Red     |
-| Success    | Emerald Green |
+```text id="klmls9"
+Agendar
+```
 
 ---
 
-# Tipografía
+# 4. Flujo Citas y Pago
 
-| Uso       | Fuente     |
-| --------- | ---------- |
-| Títulos   | Montserrat |
-| Contenido | Open Sans  |
+## Paso 1
 
----
-
-# Diseño UX
-
-## Dashboard Paciente
-
-Incluye:
-
-* próximas citas
-* historial reciente
-* odontograma rápido
-* pagos pendientes
+Seleccionar horario.
 
 ---
 
-## Dashboard Dentista
+## Paso 2
 
-Incluye:
-
-* agenda del día
-* pacientes activos
-* tratamientos
-* odontograma interactivo
+Formulario de cita.
 
 ---
 
-## Dashboard Admin
+## Paso 3
 
-Incluye:
+Pantalla de pago:
 
-* métricas financieras
-* inventario
-* empleados
-* reportes
-
----
-
-# 📅 FASE 6 — SISTEMA DE CITAS INTELIGENTE
-
-## Objetivo
-
-Automatizar completamente:
-
-* agenda médica
-* disponibilidad
-* conflictos horarios
+* Método
+* Monto
+* Referencia
 
 ---
 
-# Funcionalidades
+## Paso 4
 
-## Reserva Inteligente
+Confirmación:
 
-El sistema:
-
-* evita doble reserva
-* detecta conflictos
-* calcula duración
-* sugiere horarios
+* Ticket digital
+* Código QR
+* Resumen
 
 ---
 
-## Recordatorios
+# 5. Historial
 
-Notificaciones:
+Lista cronológica:
 
-* 24 horas antes
-* 1 hora antes
-* cambios de horario
-
----
-
-## Estados Automáticos
-
-Cambio automático:
-
-* pendiente → confirmada
-* confirmada → completada
+* Consultas
+* Pagos
+* Tratamientos
+* Recetas
 
 ---
 
-# 🦷 FASE 7 — ODONTOGRAMA INTERACTIVO
+# 🦷 FASE 5 — ODONTOGRAMA INTERACTIVO
 
-## Objetivo
+# Objetivo
 
-Crear un sistema visual profesional para diagnóstico dental.
-
----
-
-# Características Técnicas
-
-## Renderizado Dental
-
-Se utilizará:
-
-* CustomPainter
-* SVG dental mapping
-* InteractiveViewer
+Sistema visual dental interactivo.
 
 ---
 
-## Interacciones
+# Componentes Técnicos
 
-Cada diente:
-
-* seleccionable
-* editable
-* coloreable
-* documentable
+| Herramienta       | Uso              |
+| ----------------- | ---------------- |
+| SVG               | Mapa dental      |
+| InteractiveViewer | Zoom             |
+| CustomPainter     | Pintado dinámico |
 
 ---
 
-## Estados Visuales
+# Estados Visuales
 
 | Estado      | Color |
 | ----------- | ----- |
@@ -618,294 +816,378 @@ Cada diente:
 
 ---
 
-# 💳 FASE 8 — FACTURACIÓN Y PAGOS
+# 📈 FASE 6 — GESTIÓN DE ESTADO CON PROVIDER
 
-## Objetivo
+# Arquitectura Provider
 
-Centralizar procesos financieros clínicos.
+## Providers Principales
 
----
-
-# Funcionalidades
-
-## Facturación
-
-Incluye:
-
-* generación PDF
-* tickets digitales
-* historial financiero
+| Provider           | Función              |
+| ------------------ | -------------------- |
+| AuthProvider       | Login y sesión       |
+| CitasProvider      | Gestión de citas     |
+| PagosProvider      | Pagos                |
+| DoctoresProvider   | Información doctores |
+| InventarioProvider | Inventario           |
+| PacientesProvider  | Pacientes            |
 
 ---
 
-## Métodos de Pago
+# Flujo de Estado
 
-* efectivo
-* tarjeta
-* transferencia
-* pagos parciales
-
----
-
-## Automatización
-
-Al pagar:
-
-* actualiza factura
-* actualiza inventario
-* genera comprobante
+```text id="s6owbo"
+UI → Provider → Servicio → Firebase
+```
 
 ---
 
-# 📦 FASE 9 — INVENTARIO MÉDICO
+# Beneficios
 
-## Objetivo
-
-Control total de insumos clínicos.
-
----
-
-# Funcionalidades
-
-## Control de Stock
-
-El sistema:
-
-* detecta mínimos
-* alerta faltantes
-* genera historial
+* Centralización lógica
+* UI reactiva
+* Reutilización
+* Escalabilidad
 
 ---
 
-## Movimientos
+# 🚀 FASE 7 — OPTIMIZACIÓN Y ESCALABILIDAD
 
-Tipos:
+# Firestore
 
-* entrada
-* salida
-* ajuste
-* desperdicio
+## Estrategias
 
----
-
-# 📊 FASE 10 — ANALÍTICA Y REPORTES
-
-## Objetivo
-
-Convertir la plataforma en un sistema de inteligencia clínica.
+* Índices compuestos
+* Consultas paginadas
+* Caché offline
+* Lazy loading
 
 ---
 
-# Reportes
+# Flutter
 
-## Financieros
+## Optimización
 
-* ingresos
-* pagos pendientes
-* tratamientos vendidos
-
----
-
-## Clínicos
-
-* pacientes frecuentes
-* tratamientos comunes
-* historial odontológico
+* Widgets reutilizables
+* Renderizado eficiente
+* Carga diferida
+* Compresión de imágenes
 
 ---
 
-## Inventario
+# 🧪 FASE 8 — TESTING Y QA
 
-* productos críticos
-* rotación
-* pérdidas
+# Testing
 
----
-
-# 📱 FASE 11 — RESPONSIVIDAD MULTIPLATAFORMA
-
-## Mobile
-
-* Bottom Navigation
-* navegación táctil
-* UX simplificada
+| Tipo             | Objetivo       |
+| ---------------- | -------------- |
+| Unit Test        | Lógica         |
+| Widget Test      | UI             |
+| Integration Test | Flujo completo |
 
 ---
 
-## Tablet
+# 🚀 FASE 9 — DESPLIEGUE
 
-* panel dividido
-* multitarea clínica
+# Ambientes
 
----
-
-## Desktop
-
-* NavigationRail
-* dashboards avanzados
-* múltiples paneles
+| Ambiente   | Uso             |
+| ---------- | --------------- |
+| Desarrollo | Desarrollo      |
+| Staging    | QA              |
+| Producción | Usuarios reales |
 
 ---
 
-# ⚙️ FASE 12 — GESTIÓN DE ESTADO (SIN PROVIDER)
-
-## Arquitectura Recomendada
-
-Dado que NO deseas utilizar Provider, las opciones recomendadas son:
-
-| Tecnología | Ventaja                            |
-| ---------- | ---------------------------------- |
-| Riverpod   | Moderna, segura y escalable        |
-| Bloc       | Empresarial y predecible           |
-| Cubit      | Simplificación de Bloc             |
-| GetX       | Muy rápida pero menos estructurada |
-
----
-
-# Recomendación Empresarial
-
-## Riverpod + StateNotifier
-
-Porque:
-
-* desacopla lógica
-* mejora testing
-* evita context issues
-* altamente escalable
-* ideal para Clean Architecture
-
----
-
-# 📚 DEPENDENCIAS RECOMENDADAS (SIN CÓDIGO)
-
-## Firebase
-
-* Firebase Core
-* Cloud Firestore
-* Firebase Authentication
-* Firebase Storage
-* Firebase Messaging
-* Firebase Analytics
-* Cloud Functions
-
----
-
-## Arquitectura y Estado
-
-* Riverpod
-* Flutter Hooks
-* Freezed
-* Json Serializable
-
----
-
-## UI/UX
-
-* Google Fonts
-* Flutter SVG
-* Lottie Animations
-* Cached Network Image
-* Shimmer
-* Font Awesome
-
----
-
-## Seguridad
-
-* Flutter Secure Storage
-* Local Authentication
-
----
-
-## Utilidades
-
-* Intl
-* UUID
-* Go Router
-* Equatable
-
----
-
-# 🔥 FASE 13 — OPTIMIZACIÓN Y ESCALABILIDAD
-
-## Estrategia de Rendimiento
-
-### Firestore
-
-* índices compuestos
-* consultas paginadas
-* cache offline
-
----
-
-## Flutter
-
-* Lazy Loading
-* Skeleton Loaders
-* Image Optimization
-* Modular Widgets
-
----
-
-# 🧪 FASE 14 — TESTING Y CALIDAD
-
-## Testing
-
-| Tipo             | Objetivo          |
-| ---------------- | ----------------- |
-| Unit Test        | lógica de negocio |
-| Widget Test      | UI                |
-| Integration Test | flujo completo    |
-
----
-
-# 🚀 FASE 15 — DESPLIEGUE Y DEVOPS
-
-## Ambientes
-
-| Ambiente    | Uso             |
-| ----------- | --------------- |
-| Development | pruebas         |
-| Staging     | QA              |
-| Production  | usuarios reales |
-
----
-
-## CI/CD
+# CI/CD
 
 Automatización:
 
-* builds Android
-* builds iOS
-* deploy web
-* testing automático
+* Builds Android
+* Builds iOS
+* Deploy Firebase Hosting
+* Pruebas automáticas
 
 ---
 
 # 🧠 CONCLUSIÓN ARQUITECTÓNICA
 
-Este nuevo plan transforma “Dentista” de una simple aplicación clínica a una:
+La plataforma “Dentista” queda diseñada como:
 
-* Plataforma médica empresarial
+* Sistema clínico empresarial
 * Arquitectura escalable
-* Sistema clínico seguro
-* Ecosistema multiplataforma moderno
-* Software preparado para crecimiento real
+* Aplicación segura
+* Ecosistema odontológico moderno
+* Plataforma preparada para crecimiento real
 
 La combinación de:
 
 * Flutter
 * Firebase
-* Clean Architecture
-* Riverpod
-* Diseño Mint Blue
-* Seguridad clínica avanzada
+* Firestore
+* Provider
+* Arquitectura Limpia
+* UI Azul Menta
 
-convierte el proyecto en una solución profesional comparable con software odontológico premium internacional.
+permite construir una solución odontológica profesional comparable con software clínico premium internacional.
+
+# 🎨 FASE 10 — SISTEMA DE COLORES Y DISEÑO VISUAL “MINT BLUE”
+
+# Objetivo
+
+Diseñar una identidad visual profesional enfocada en transmitir:
+
+* Higiene clínica
+* Confianza médica
+* Tecnología moderna
+* Claridad visual
+* Experiencia premium
+
+La interfaz deberá mantener una apariencia limpia, elegante y minimalista, optimizada para:
+
+* Mobile
+* Tablet
+* Desktop
+* Web
+
+---
+
+# 🟦 PALETA DE COLORES PRINCIPAL
+
+## Colores Base del Sistema
+
+| Elemento         | Color         | Código HEX |
+| ---------------- | ------------- | ---------- |
+| Primario         | Mint Blue     | #4FD1C5    |
+| Secundario       | Soft Mint     | #81E6D9    |
+| Accent           | Teal          | #319795    |
+| Fondo Principal  | White Blue    | #F7FAFC    |
+| Fondo Secundario | Ice White     | #EDF2F7    |
+| Error            | Coral Red     | #F56565    |
+| Éxito            | Emerald Green | #48BB78    |
+| Advertencia      | Soft Orange   | #ED8936    |
+| Texto Principal  | Dark Slate    | #1A202C    |
+| Texto Secundario | Gray Blue     | #4A5568    |
+| Bordes           | Soft Gray     | #CBD5E0    |
+
+---
+
+# 🎯 APLICACIÓN DE COLORES EN LA INTERFAZ
+
+## Barra Superior (AppBar)
+
+| Elemento | Color     |
+| -------- | --------- |
+| Fondo    | Mint Blue |
+| Texto    | Blanco    |
+| Íconos   | Blanco    |
+
+---
+
+## Botones
+
+### Botón Primario
+
+| Propiedad | Color     |
+| --------- | --------- |
+| Fondo     | Mint Blue |
+| Texto     | Blanco    |
+| Hover     | Teal      |
+
+---
+
+### Botón Secundario
+
+| Propiedad | Color     |
+| --------- | --------- |
+| Fondo     | Blanco    |
+| Borde     | Mint Blue |
+| Texto     | Mint Blue |
+
+---
+
+## Inputs y Formularios
+
+| Elemento     | Color     |
+| ------------ | --------- |
+| Fondo        | Blanco    |
+| Borde Activo | Mint Blue |
+| Placeholder  | Gray Blue |
+| Error        | Coral Red |
+
+---
+
+# 🦷 COLORES DEL ODONTOGRAMA
+
+## Estados Dentales
+
+| Estado      | Color   | HEX     |
+| ----------- | ------- | ------- |
+| Diente sano | Verde   | #48BB78 |
+| Caries      | Rojo    | #F56565 |
+| Tratamiento | Azul    | #4299E1 |
+| Ausente     | Gris    | #A0AEC0 |
+| Implante    | Morado  | #9F7AEA |
+| Corona      | Dorado  | #D69E2E |
+| Endodoncia  | Naranja | #ED8936 |
+
+---
+
+# 📊 COLORES PARA DASHBOARDS Y REPORTES
+
+## Dashboard Administrativo
+
+| Métrica         | Color         |
+| --------------- | ------------- |
+| Ingresos        | Emerald Green |
+| Gastos          | Coral Red     |
+| Citas           | Mint Blue     |
+| Inventario Bajo | Soft Orange   |
+
+---
+
+## Gráficas
+
+| Tipo             | Color     |
+| ---------------- | --------- |
+| Línea principal  | Mint Blue |
+| Línea secundaria | Teal      |
+| Barras positivas | Verde     |
+| Barras negativas | Rojo      |
+
+---
+
+# 🧠 PSICOLOGÍA DEL COLOR
+
+## Mint Blue
+
+Transmite:
+
+* Limpieza
+* Salud
+* Tecnología
+* Profesionalismo
+* Calma
+
+Ideal para sistemas médicos y odontológicos.
+
+---
+
+## Teal
+
+Representa:
+
+* Precisión
+* Seguridad
+* Innovación
+
+Usado para acciones importantes y navegación.
+
+---
+
+## White Blue
+
+Genera:
+
+* Sensación clínica
+* Claridad
+* Espacios limpios
+* Menos fatiga visual
+
+---
+
+# ✨ EFECTOS VISUALES Y ESTILO UI
+
+# Sombras
+
+## Tarjetas
+
+| Propiedad | Valor       |
+| --------- | ----------- |
+| Blur      | 12          |
+| Opacidad  | 0.08        |
+| Color     | Negro suave |
+
+---
+
+# Bordes
+
+| Elemento | Radio |
+| -------- | ----- |
+| Inputs   | 14px  |
+| Botones  | 16px  |
+| Tarjetas | 20px  |
+
+---
+
+# Animaciones
+
+## Transiciones
+
+* Fade
+* Slide
+* Scale
+* Hero Animations
+
+---
+
+# Responsividad
+
+## Mobile
+
+* Navegación inferior
+* Botones amplios
+* Inputs táctiles
+
+---
+
+## Tablet
+
+* Panel dividido
+* Sidebar clínica
+
+---
+
+## Desktop
+
+* Dashboard avanzado
+* Multi panel
+* Estadísticas simultáneas
+
+---
+
+# 🖋️ TIPOGRAFÍA OFICIAL
+
+| Uso          | Fuente     |
+| ------------ | ---------- |
+| Títulos      | Montserrat |
+| Contenido    | Open Sans  |
+| Estadísticas | Poppins    |
+| Formularios  | Inter      |
+
+---
+
+# 🎯 OBJETIVO UX FINAL
+
+La interfaz deberá sentirse como:
+
+* Un software médico premium
+* Una plataforma clínica moderna
+* Un ecosistema odontológico profesional
+* Una aplicación rápida y elegante
+
+El diseño “Mint Blue” permitirá diferenciar visualmente la plataforma frente a software clínico tradicionales, proporcionando una experiencia moderna, limpia y altamente intuitiva.
 
 
 
-## PROMP 
+## PROMT 
+
+Este es el **prompt definitivo y ultra-detallado**. Está diseñado para que no falte ni un solo campo de la base de datos ni una sola subcarpeta del proyecto.
+
+Cópialo y pégalo tal cual en la IA que vayas a utilizar:
+
+---
+
+**COPIA DESDE AQUÍ:**
 
 En este proyecto estamos trabajando en el diseño y desarrollo integral de una solución tecnológica avanzada para la gestión de una clínica odontológica profesional. El objetivo principal es construir una aplicación multiplataforma de alto rendimiento utilizando el framework **Flutter** y como entorno de desarrollo principal **Visual Studio Code**, integrando de manera robusta los servicios de **Firebase** mediante su consola (**Fireconsole**) para la gestión de datos en tiempo real, autenticación de usuarios y almacenamiento en la nube. Esta iniciativa busca digitalizar por completo el flujo de trabajo de un dentista, desde el primer contacto del paciente y la visualización de perfiles médicos de los doctores, hasta el control clínico detallado mediante odontogramas, la gestión de inventarios de productos médicos, y el procesamiento financiero de facturas y pagos. Todo esto se desarrollará bajo una arquitectura limpia y escalable, priorizando una experiencia de usuario moderna con una estética profesional basada en tonos azul menta, garantizando que el sistema sea capaz de manejar de forma segura la información sensible de los pacientes y la logística operativa de la clínica de manera eficiente y automatizada.
 
